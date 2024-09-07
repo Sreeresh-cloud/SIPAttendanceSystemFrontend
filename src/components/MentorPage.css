@@ -1,11 +1,9 @@
-/* Reset some default styles */
 body, h1, ul, li, a {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
   
-  /* Mentor Page Container */
   .mentor-page {
     display: flex;
     flex-direction: column;
@@ -17,7 +15,6 @@ body, h1, ul, li, a {
     padding: 2rem;
   }
   
-  /* Heading Styles */
   .mentor-page h1 {
     font-size: 2rem;
     color: #333;
@@ -25,15 +22,13 @@ body, h1, ul, li, a {
     text-align: center;
   }
   
-  /* List Group Styles */
   .list-group {
     list-style: none;
     padding: 0;
     width: 100%;
-    max-width: 600px; /* Limit the width */
+    max-width: 600px; 
   }
   
-  /* List Group Item Styles */
   .list-group-item {
     background: #fff;
     border: 1px solid #ddd;
@@ -43,20 +38,17 @@ body, h1, ul, li, a {
     transition: background-color 0.3s ease, transform 0.2s ease;
   }
   
-  /* Link Styles */
   .list-link {
     text-decoration: none;
     color: #007bff;
     font-size: 1.1rem;
   }
   
-  /* Link Hover Effects */
   .list-link:hover {
     color: #0056b3;
     text-decoration: underline;
   }
   
-  /* Responsive Design */
   @media (min-width: 600px) {
     .list-group-item {
       padding: 1.5rem;

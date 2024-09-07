@@ -9,8 +9,8 @@
 }
 
 .timetable {
-  display: flex; /* Makes the time slots appear horizontally */
-  gap: 15px; /* Adds spacing between the time slots */
+  display: flex; 
+  gap: 15px; 
 }
 
 .time-slot {

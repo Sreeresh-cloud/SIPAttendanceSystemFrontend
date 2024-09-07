@@ -1,30 +1,29 @@
 import React, { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-// Sample students data with attendance history
 const studentsData = [
-  { name: 'A', department: 'CSE', attendance: '80%' },
-  { name: 'B', department: 'ECE', attendance: '90%' },
-  { name: 'C', department: 'EEE', attendance: '85%' },
-  { name: 'D', department: 'ER', attendance: '75%' },
-  { name: 'E', department: 'ME', attendance: '70%' },
-  { name: 'F', department: 'CE', attendance: '95%' },
-  { name: 'G', department: 'CHEM', attendance: '88%' },
-  { name: 'H', department: 'ARCH', attendance: '92%' },
-  { name: 'I', department: 'CSE', attendance: '78%' },
-  { name: 'J', department: 'ECE', attendance: '85%' },
-  {name: 'K', department: 'EEE', attendance: '80%' }, 
-  { name: 'L', department: 'ER', attendance: '70%' }, 
-  { name: 'M', department: 'ME', attendance: '82%' }, 
-  { name: 'N', department: 'CE', attendance: '90%' }, 
-  { name: 'O', department: 'CHEM', attendance: '75%' }, 
-  { name: 'P', department: 'ARCH', attendance: '85%' }
+  { name: 'A', department: 'CSE', applicationNumber: '240000' },
+  { name: 'B', department: 'ECE', applicationNumber: '240001' },
+  { name: 'C', department: 'EEE', applicationNumber: '240002' },
+  { name: 'D', department: 'ER', applicationNumber: '240003' },
+  { name: 'E', department: 'ME', applicationNumber: '240004' },
+  { name: 'F', department: 'CE', applicationNumber: '240005' },
+  { name: 'G', department: 'CHEM', applicationNumber: '240006' },
+  { name: 'H', department: 'ARCH', applicationNumber: '240007' },
+  { name: 'I', department: 'CSE', applicationNumber: '240008' },
+  { name: 'J', department: 'ECE', applicationNumber: '240009' },
+  { name: 'K', department: 'EEE', applicationNumber: '240010' },
+  { name: 'L', department: 'ER', applicationNumber: '240011' },
+  { name: 'M', department: 'ME', applicationNumber: '240012' },
+  { name: 'N', department: 'CE', applicationNumber: '240013' },
+  { name: 'O', department: 'CHEM', applicationNumber: '240014' },
+  { name: 'P', department: 'ARCH', applicationNumber: '240015' }
 ];
 
 const DepartmentStudentsPage = () => {
-  const { department } = useParams(); // Get department from the URL
+  const { department } = useParams();
+  const navigate = useNavigate();
 
-  // Filter and sort students by department and name in ascending order
   const departmentStudents = useMemo(
     () =>
       studentsData
@@ -32,6 +31,10 @@ const DepartmentStudentsPage = () => {
         .sort((a, b) => a.name.localeCompare(b.name)),
     [department]
   );
+
+  const handleStudentClick = (student) => {
+    navigate(`/student/${student.applicationNumber}`);
+  };
 
   return (
     <div className="department-students-page">
@@ -42,16 +45,16 @@ const DepartmentStudentsPage = () => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Department</th>
-              <th>Attendance</th>
+              <th>Application Number</th>
+              <th>Department</th> 
             </tr>
           </thead>
           <tbody>
             {departmentStudents.map((student) => (
-              <tr key={student.name}>
+              <tr key={student.applicationNumber} onClick={() => handleStudentClick(student)}>
                 <td>{student.name}</td>
-                <td>{student.department}</td>
-                <td>{student.attendance}</td>
+                <td>{student.applicationNumber}</td>
+                <td>{student.department}</td> 
               </tr>
             ))}
           </tbody>

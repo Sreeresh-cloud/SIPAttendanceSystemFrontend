@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'; // UseParams to get groupId
+import { useNavigate, useParams } from 'react-router-dom'; 
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday'];
-const timeSlots = ['9-10 AM', '10-11 AM', '11-12 PM', '2-3 PM', '3-4 PM'];
+const timeSlots = ['FORENOON', 'AFTERNOON'];
 
 const DaySelector = () => {
-  const { groupId } = useParams(); // Get groupId from URL params
+  const { groupId } = useParams(); 
   const [expandedDays, setExpandedDays] = useState({});
   const navigate = useNavigate();
 
@@ -17,7 +17,6 @@ const DaySelector = () => {
   };
 
   const handleTimeSlotClick = (day, time) => {
-    // Include groupId in the URL when navigating to AttendancePage
     navigate(`/attendance/${groupId}/${day}/${time}`);
   };
 
@@ -32,7 +31,6 @@ const DaySelector = () => {
               {day}
             </div>
 
-            {/* Conditionally render the timetable with a smooth transition */}
             {expandedDays[day] && (
               <div className="timetable-wrapper" style={{ transition: 'max-height 0.5s ease-in-out', overflow: 'hidden' }}>
                 <div className="timetable">

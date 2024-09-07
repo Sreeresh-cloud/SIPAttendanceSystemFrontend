@@ -4,8 +4,9 @@ import Home from './components/Home';
 import MentorPage from './components/MentorPage';
 import DaySelector from './components/DaySelector';
 import AttendancePage from './components/AttendancePage';
-import AdvisorPage from './components/AdvisorPage'; // Import AdvisorPage
-import DepartmentStudentsPage from './components/DepartmentStudentsPage'; // Import DepartmentStudentsPage
+import AdvisorPage from './components/AdvisorPage';
+import DepartmentStudentsPage from './components/DepartmentStudentsPage'; 
+import StudentAttendancePage from './components/StudentAttendancePage';
 
 function App() {
   return (
@@ -16,10 +17,10 @@ function App() {
           <Route path="/mentors" element={<MentorPage />} />
           <Route path="/mentors/:groupId" element={<DaySelector />} />
           <Route path="/attendance/:groupId/:day/:time" element={<AttendancePage />} />
-          {/* Route for Advisors */}
           <Route path="/advisors" element={<AdvisorPage />} />
-          {/* Route for students by department */}
           <Route path="/departments/:department" element={<DepartmentStudentsPage />} />
+          <Route path="/student/:applicationNumber" element={<StudentAttendancePage />} />
+
         </Routes>
       </div>
     </Router>

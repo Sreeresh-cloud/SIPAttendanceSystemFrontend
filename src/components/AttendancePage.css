@@ -1,103 +1,79 @@
-/* Reset some default styles */
-body, h1, table, th, td, button {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Page Container */
-  .attendance-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #f9f9f9;
-    font-family: Arial, sans-serif;
-    padding: 2rem;
-  }
-  
-  /* Heading Styles */
-  .attendance-page h1 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-  
-  /* Table Styles */
-  .table {
-    width: 100%;
-    max-width: 800px;
-    border-collapse: collapse;
-    margin-bottom: 2rem;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-    overflow: hidden;
-  }
-  
-  /* Table Header Styles */
-  .table thead {
-    background: #007bff;
-    color: #fff;
-  }
-  
-  /* Table Header Cells */
-  .table th {
-    padding: 1rem;
-    text-align: left;
-  }
-  
-  /* Table Body Styles */
-  .table tbody tr {
-    border-bottom: 1px solid #ddd;
-  }
-  
-  /* Table Body Cells */
-  .table td {
-    padding: 1rem;
-    text-align: left;
-  }
-  
-  /* Button Styles */
-  .btn {
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.3rem;
-    cursor: pointer;
-    font-size: 1rem;
-    color: #fff;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  /* Present Button Styles */
-  .btn-success {
-    background-color: #28a745;
-  }
-  
-  /* Absent Button Styles */
-  .btn-danger {
-    background-color: #dc3545;
-  }
-  
-  /* Button Hover Effects */
-  .btn:hover {
-    transform: translateY(-2px);
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 600px) {
-    .table {
-      font-size: 0.9rem;
-    }
-  
-    .table th, .table td {
-      padding: 0.75rem;
-    }
-  
-    .attendance-page h1 {
-      font-size: 1.5rem;
-    }
-  }
-  
+
+.update-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn-update {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-update.loading {
+  background-color: #f39c12;
+  cursor: not-allowed;
+  animation: pulse 1s infinite;
+}
+
+.btn-update:hover {
+  background-color: #45a049;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.update-success-message {
+  margin-top: 20px;
+  text-align: center;
+  background-color: #4caf50;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  width: 50%;
+  margin: 20px auto;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-success {
+  background-color: green;
+}
+
+.btn-danger {
+  background-color: red;
+}

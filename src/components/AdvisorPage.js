@@ -8,7 +8,6 @@ const departments = ['CSE', 'ECE', 'EEE', 'ER', 'ME', 'CE', 'CHEM', 'ARCH'];
 const AdvisorPage = () => {
   const navigate = useNavigate();
 
-  // Function to handle navigation to the department's student list
   const handleDepartmentClick = (department) => {
     navigate(`/departments/${department}`);
   };
