@@ -1,37 +1,37 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
-import './AttendancePage.css';
+import React, { useState, useEffect, useMemo } from "react";
+import { useParams } from "react-router-dom";
+import "./AttendancePage.css";
 
 const studentsData = {
   G1: [
-    { name: 'A', department: 'CSE' },
-    { name: 'B', department: 'ECE' },
-    { name: 'C', department: 'EEE' },
-    { name: 'D', department: 'ER' }
+    { name: "A", department: "CSE" },
+    { name: "B", department: "ECE" },
+    { name: "C", department: "EEE" },
+    { name: "D", department: "ER" },
   ],
   G2: [
-    { name: 'E', department: 'ME' },
-    { name: 'F', department: 'CE' },
-    { name: 'G', department: 'CHE' },
-    { name: 'H', department: 'ARCH' }
+    { name: "E", department: "ME" },
+    { name: "F", department: "CE" },
+    { name: "G", department: "CHE" },
+    { name: "H", department: "ARCH" },
   ],
   G3: [
-    { name: 'I', department: 'CSE' },
-    { name: 'J', department: 'ECE' },
-    { name: 'K', department: 'EEE' },
-    { name: 'L', department: 'ER' }
+    { name: "I", department: "CSE" },
+    { name: "J", department: "ECE" },
+    { name: "K", department: "EEE" },
+    { name: "L", department: "ER" },
   ],
   G4: [
-    { name: 'M', department: 'ME' },
-    { name: 'N', department: 'CE' },
-    { name: 'O', department: 'CHE' },
-    { name: 'P', department: 'ARCH' }
-  ]
+    { name: "M", department: "ME" },
+    { name: "N", department: "CE" },
+    { name: "O", department: "CHE" },
+    { name: "P", department: "ARCH" },
+  ],
 };
 
 const AttendancePage = () => {
   const { groupId, day, time } = useParams();
-  console.log("Group ID:", groupId); 
+  console.log("Group ID:", groupId);
 
   const students = useMemo(() => studentsData[groupId] || [], [groupId]);
 
@@ -41,7 +41,7 @@ const AttendancePage = () => {
 
   useEffect(() => {
     if (students.length > 0) {
-      setAttendance(students.map(student => ({ ...student, present: true })));
+      setAttendance(students.map((student) => ({ ...student, present: true })));
     }
   }, [students]);
 
@@ -56,7 +56,7 @@ const AttendancePage = () => {
 
     setTimeout(() => {
       setIsUpdating(false);
-      setUpdateSuccess(true); 
+      setUpdateSuccess(true);
 
       setTimeout(() => setUpdateSuccess(false), 2000);
     }, 1500);
@@ -64,7 +64,9 @@ const AttendancePage = () => {
 
   return (
     <div className="attendance-page">
-      <h1>{groupId} - {day} - {time}</h1>
+      <h1>
+        {groupId} - {day} - {time}
+      </h1>
 
       {students.length > 0 ? (
         <>
@@ -83,10 +85,10 @@ const AttendancePage = () => {
                   <td>{student.department}</td>
                   <td>
                     <button
-                      className={`btn ${student.present ? 'btn-success' : 'btn-danger'}`}
+                      className={`btn ${student.present ? "btn-success" : "btn-danger"}`}
                       onClick={() => toggleAttendance(index)}
                     >
-                      {student.present ? 'Present' : 'Absent'}
+                      {student.present ? "Present" : "Absent"}
                     </button>
                   </td>
                 </tr>
@@ -96,11 +98,11 @@ const AttendancePage = () => {
 
           <div className="update-button-container">
             <button
-              className={`btn-update ${isUpdating ? 'loading' : ''}`}
+              className={`btn-update ${isUpdating ? "loading" : ""}`}
               onClick={handleUpdate}
               disabled={isUpdating}
             >
-              {isUpdating ? 'Updating...' : 'Update Attendance'}
+              {isUpdating ? "Updating..." : "Update Attendance"}
             </button>
           </div>
 

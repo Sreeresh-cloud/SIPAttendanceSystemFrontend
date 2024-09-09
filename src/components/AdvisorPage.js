@@ -1,9 +1,8 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import './AdvisorPage.css'; 
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./AdvisorPage.css";
 
-
-const departments = ['CSE', 'ECE', 'EEE', 'ER', 'ME', 'CE', 'CHEM', 'ARCH'];
+const departments = ["CSE", "ECE", "EEE", "ER", "ME", "CE", "CHEM", "ARCH"];
 
 const AdvisorPage = () => {
   const navigate = useNavigate();
