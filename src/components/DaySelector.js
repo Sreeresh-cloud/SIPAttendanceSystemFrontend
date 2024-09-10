@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday"];
+import { DAYS, dateFormatter } from "../helpers";
 const timeSlots = ["FORENOON", "AFTERNOON"];
 
 const DaySelector = () => {
@@ -24,10 +23,10 @@ const DaySelector = () => {
     <div className="day-selector">
       <h1>Select a Day</h1>
       <ul className="list-group">
-        {days.map((day) => (
+        {DAYS.map((day) => (
           <li key={day} className="list-group-item">
             <div onClick={() => toggleDay(day)} className="day-header">
-              {day}
+              {dateFormatter.format(new Date(day))}
             </div>
 
             {expandedDays[day] && (

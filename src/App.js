@@ -14,21 +14,20 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
+
           <Route path="/mentors" element={<MentorPage />} />
           <Route path="/mentors/:groupId" element={<DaySelector />} />
           <Route
             path="/attendance/:groupId/:day/:time"
             element={<AttendancePage />}
           />
+
           <Route path="/advisors" element={<AdvisorPage />} />
           <Route
-            path="/departments/:department"
+            path="/departments/:advisorId"
             element={<DepartmentStudentsPage />}
           />
-          <Route
-            path="/student/:applicationNumber"
-            element={<StudentAttendancePage />}
-          />
+          <Route path="/student/:id" element={<StudentAttendancePage />} />
         </Routes>
       </div>
     </Router>
