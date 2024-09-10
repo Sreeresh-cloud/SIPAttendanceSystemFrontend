@@ -1,66 +1,96 @@
-import React, { useMemo } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "../http-client";
 
-const studentsData = [
-  { name: 'A', department: 'CSE', applicationNumber: '240000' },
-  { name: 'B', department: 'ECE', applicationNumber: '240001' },
-  { name: 'C', department: 'EEE', applicationNumber: '240002' },
-  { name: 'D', department: 'ER', applicationNumber: '240003' },
-  { name: 'E', department: 'ME', applicationNumber: '240004' },
-  { name: 'F', department: 'CE', applicationNumber: '240005' },
-  { name: 'G', department: 'CHEM', applicationNumber: '240006' },
-  { name: 'H', department: 'ARCH', applicationNumber: '240007' },
-  { name: 'I', department: 'CSE', applicationNumber: '240008' },
-  { name: 'J', department: 'ECE', applicationNumber: '240009' },
-  { name: 'K', department: 'EEE', applicationNumber: '240010' },
-  { name: 'L', department: 'ER', applicationNumber: '240011' },
-  { name: 'M', department: 'ME', applicationNumber: '240012' },
-  { name: 'N', department: 'CE', applicationNumber: '240013' },
-  { name: 'O', department: 'CHEM', applicationNumber: '240014' },
-  { name: 'P', department: 'ARCH', applicationNumber: '240015' }
-];
+const StudentsTable = ({ students }) => {
+  const navigate = useNavigate();
+  const handleClick = (student) => navigate(`/student/${student.id}`);
+
+  return (
+    <table className="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Application Number</th>
+          <th>Department</th>
+          <th>Attendance</th>
+        </tr>
+      </thead>
+      <tbody>
+        {students.map((student) => (
+          <tr key={student.admissionNo} onClick={() => handleClick(student)}>
+            <td>{`${student.firstName} ${student.lastName}`}</td>
+            <td>{student.admissionNo}</td>
+            <td>{student.advisor.batch}</td>
+            <td>{student.attendancePercentage} %</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
 
 const DepartmentStudentsPage = () => {
-  const { department } = useParams();
-  const navigate = useNavigate();
+  const { advisorId } = useParams();
+  const [hasMountedAdvisorData, setHasMountedAdvisorData] = useState(false);
+  const [advisorData, setAdvisorData] = useState(null);
+  const [hasMountedData, setHasMountedData] = useState(false);
+  const [students, setStudents] = useState([]);
 
-  const departmentStudents = useMemo(
-    () =>
-      studentsData
-        .filter((student) => student.department === department)
-        .sort((a, b) => a.name.localeCompare(b.name)),
-    [department]
-  );
+  useEffect(() => {
+    async function getAdvisorData() {
+      try {
+        const response = await axios.get("/advisors");
+        if (response.data == null || !Array.isArray(response.data)) return;
+        const advisor = response.data.find(
+          (advisor) => advisor.id.toString() === advisorId.toString()
+        );
+        setHasMountedAdvisorData(true);
+        setAdvisorData(advisor);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    if (!hasMountedAdvisorData) getAdvisorData();
+  }, [advisorId, hasMountedAdvisorData]);
 
-  const handleStudentClick = (student) => {
-    navigate(`/student/${student.applicationNumber}`);
-  };
+  useEffect(() => {
+    if (advisorData == null) return;
+    async function getStudentsData() {
+      try {
+        const response = await axios.get(`/advisor/${advisorId}`);
+        if (response.data == null || !Array.isArray(response.data)) return;
+        setStudents(
+          response.data.sort((s1, s2) =>
+            (s1.firstName + s1.lastName).localeCompare(
+              s2.firstName + s2.lastName
+            )
+          )
+        );
+        setHasMountedData(true);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    if (!hasMountedData) getStudentsData();
+  }, [advisorId, hasMountedData, advisorData]);
+
+  if (!hasMountedAdvisorData)
+    return <div className="department-students-page">Loading...</div>;
+
+  if (advisorData == null)
+    return <div className="department-students-page">Not found</div>;
 
   return (
     <div className="department-students-page">
-      <h1>Students in {department} Department</h1>
+      <h1>Students in {advisorData.batch} Department</h1>
 
-      {departmentStudents.length > 0 ? (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Application Number</th>
-              <th>Department</th> 
-            </tr>
-          </thead>
-          <tbody>
-            {departmentStudents.map((student) => (
-              <tr key={student.applicationNumber} onClick={() => handleStudentClick(student)}>
-                <td>{student.name}</td>
-                <td>{student.applicationNumber}</td>
-                <td>{student.department}</td> 
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {!hasMountedData ? (
+        <p>Loading student data</p>
+      ) : students.length > 0 ? (
+        <StudentsTable students={students} />
       ) : (
-        <p>No students available for {department}</p>
+        <p>No students available for {advisorData.batch}</p>
       )}
     </div>
   );

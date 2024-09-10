@@ -1,57 +1,60 @@
-body, h1, a {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  .home-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: #f0f0f0;
-    font-family: Arial, sans-serif;
-  }
-  
-  .home-page h1 {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-  
+body,
+h1,
+a {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+.home-page h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 0.5rem;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+@media (min-width: 600px) {
   .options {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem; 
+    flex-direction: row;
   }
-  
+
   .btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    text-align: center;
-    text-decoration: none;
-    color: #fff;
-    background-color: #007bff;
-    border-radius: 0.5rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
   }
-  
-  .btn:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-  }
-  
-  @media (min-width: 600px) {
-    .options {
-      flex-direction: row;
-    }
-  
-    .btn {
-      padding: 0.75rem 1.5rem;
-      font-size: 1.1rem;
-    }
-  }
-  
+}

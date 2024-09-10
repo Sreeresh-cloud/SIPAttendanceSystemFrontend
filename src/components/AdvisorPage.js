@@ -1,31 +1,47 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import './AdvisorPage.css'; 
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "../http-client";
+import "./AdvisorPage.css";
 
-
-const departments = ['CSE', 'ECE', 'EEE', 'ER', 'ME', 'CE', 'CHEM', 'ARCH'];
-
-const AdvisorPage = () => {
+const List = ({ advisors }) => {
   const navigate = useNavigate();
 
-  const handleDepartmentClick = (department) => {
-    navigate(`/departments/${department}`);
-  };
+  return (
+    <ul className="list-group">
+      {advisors.map((advisor) => (
+        <li
+          key={advisor.batch}
+          className="card"
+          onClick={() => navigate(`/departments/${advisor.id}`)}
+        >
+          {advisor.batch} ({advisor.name})
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const AdvisorPage = () => {
+  const [hasMountedData, setHasMountedData] = useState(false);
+  const [advisors, setAdvisors] = useState([]);
+
+  useEffect(() => {
+    async function getAdvisors() {
+      try {
+        const response = await axios.get("/advisors");
+        setAdvisors(response.data);
+        setHasMountedData(true);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    if (!hasMountedData) getAdvisors();
+  }, [hasMountedData]);
 
   return (
     <div className="advisor-page">
       <h1>Select a Department</h1>
-      <ul className="list-group">
-        {departments.map((department) => (
-          <li
-            key={department}
-            className="card"
-            onClick={() => handleDepartmentClick(department)}
-          >
-            {department}
-          </li>
-        ))}
-      </ul>
+      <List advisors={advisors} />
     </div>
   );
 };
