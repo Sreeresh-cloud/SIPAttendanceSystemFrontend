@@ -68,7 +68,7 @@ const AttendancePage = () => {
     try {
       // TODO: fix this after fixing in backend
       for (const data of attendance) {
-        await axios.patch("/", {
+        await axios.patch("", {
           studentId: data.student.id,
           date: date,
           fnAttendance: data.fnAttendance,
