@@ -6,8 +6,8 @@ import axios from "../http-client";
 const AttendanceListRow = ({ student, present, onToggle }) => {
   return (
     <tr key={student.id}>
-      <td>{`${student.firstName}  ${student.lastName}`}</td>
-      <td>{student.advisor.batch}</td>
+      <td>{student.name}</td>
+      <td>{student.department}</td>
       <td>
         <button
           className={`btn ${present ? "btn-success" : "btn-danger"}`}
@@ -25,6 +25,8 @@ const AttendancePage = () => {
   const [hasMountedData, setHasMountedData] = useState(false);
   const [attendance, setAttendance] = useState([]);
 
+  const [oldData, setOldData] = useState({});
+
   const attendancePropKey = useMemo(() => {
     return time === "FORENOON" ? "fnAttendance" : "anAttendance";
   }, [time]);
@@ -35,17 +37,36 @@ const AttendancePage = () => {
   useEffect(() => {
     async function getAttendanceData() {
       try {
-        const response = await axios.get(`/mentor/${groupId}/${date}`);
-        if (response.data == null || !Array.isArray(response.data)) return;
-        setAttendance(
-          response.data.map((data) => {
-            return {
-              student: data.student,
-              fnAttendance: data.fnAttendance,
-              anAttendance: data.anAttendance,
-            };
-          })
+        const { data: students } = await axios.get(`/group/${groupId}`);
+        if (students == null || !Array.isArray(students)) return;
+
+        const { data: attendanceData } = await axios.get(
+          `/group/${groupId}/${date}`
         );
+        if (attendanceData == null || !Array.isArray(attendanceData)) return;
+
+        const organized = attendanceData.reduce((prev, attendance) => {
+          prev[attendance.student.id] = {
+            fnAttendance: attendance.fnAttendance,
+            anAttendance: attendance.anAttendance,
+          };
+          return prev;
+        }, {});
+
+        setOldData(organized);
+
+        setAttendance(
+          students
+            .sort((s1, s2) => s1.name.localeCompare(s2.name))
+            .map((student) => {
+              return {
+                student: student,
+                fnAttendance: organized[student.id]?.fnAttendance ?? true,
+                anAttendance: organized[student.id]?.anAttendance ?? true,
+              };
+            })
+        );
+
         setHasMountedData(true);
       } catch (error) {
         console.error(error);
@@ -68,15 +89,32 @@ const AttendancePage = () => {
     try {
       // TODO: fix this after fixing in backend
       for (const data of attendance) {
+        const initial = {
+          fnAttendance: oldData[data.student.id]?.fnAttendance ?? true,
+          anAttendance: oldData[data.student.id]?.anAttendance ?? true,
+        };
+
+        if (
+          data.fnAttendance === initial.fnAttendance &&
+          data.anAttendance === initial.anAttendance
+        )
+          continue;
+
         await axios.patch("", {
           studentId: data.student.id,
           date: date,
           fnAttendance: data.fnAttendance,
           anAttendance: data.anAttendance,
         });
+
+        oldData[data.student.id] = {
+          fnAttendance: data.fnAttendance,
+          anAttendance: data.anAttendance,
+        };
       }
       setUpdateStatus("Updated successfully!");
     } catch (error) {
+      console.error(error);
       setUpdateStatus("Failed to update.");
     } finally {
       setIsUpdating(false);

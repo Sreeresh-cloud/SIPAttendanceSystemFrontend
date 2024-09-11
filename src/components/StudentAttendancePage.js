@@ -51,14 +51,8 @@ const StudentAttendancePage = () => {
               if (response.data == null) return;
               return {
                 date,
-                fnAttendance:
-                  response.data === ""
-                    ? true
-                    : response.data.fnAttendance || true,
-                anAttendance:
-                  response.data === ""
-                    ? true
-                    : response.data.anAttendance || true,
+                fnAttendance: response.data.fnAttendance ?? true,
+                anAttendance: response.data.anAttendance ?? true,
               };
             })
           );
@@ -88,7 +82,7 @@ const StudentAttendancePage = () => {
 
   return (
     <div className="student-attendance-page">
-      <h1>{`${studentData.firstName}  ${studentData.lastName}`}</h1>
+      <h1>{studentData.name}</h1>
       {!hasMountedAttendanceData ? (
         <p>Loading attendance data...</p>
       ) : (
