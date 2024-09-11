@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./MentorPage.css";
-import axios from "../http-client";
 
-const List = ({ groups }) => {
+const List = ({ length }) => {
   return (
     <ul className="list-group">
-      {groups.map((group) => (
-        <li key={group.id} className="list-group-item">
-          <Link to={`/mentors/${group.id}`}>Group {group.groupNo} ({group.name})</Link>
+      {new Array(length).fill(0).map((_, i) => (
+        <li key={i} className="list-group-item">
+          <Link to={`/batches/${i + 1}`}>Batch {i + 1}</Link>
         </li>
       ))}
     </ul>
@@ -16,26 +15,10 @@ const List = ({ groups }) => {
 };
 
 const MentorPage = () => {
-  const [hasMountedData, setHasMountedData] = useState(false);
-  const [groups, setGroups] = useState([]);
-
-  useEffect(() => {
-    async function getMentors() {
-      try {
-        const response = await axios.get("/mentors");
-        setGroups(response.data);
-        setHasMountedData(true);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    if (!hasMountedData) getMentors();
-  }, [hasMountedData]);
-
   return (
     <div className="mentor-page">
       <h1>Mentors</h1>
-      {hasMountedData ? <List groups={groups} /> : <div>Loading...</div>}
+      <List length={21} />
     </div>
   );
 };

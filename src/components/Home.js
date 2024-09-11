@@ -9,11 +9,11 @@ const Home = () => {
       <h2>STUDENT INDUCTION PROGRAM</h2>
       <h3>ATTENDANCE SYSTEM</h3>
       <div className="options">
-        <Link to="/mentors" className="btn btn-primary">
-          Mentors
+        <Link to="/batches" className="btn btn-primary">
+          Batches
         </Link>
-        <Link to="/advisors" className="btn btn-primary">
-          Advisors
+        <Link to="/departments" className="btn btn-primary">
+          Departments
         </Link>
       </div>
     </div>

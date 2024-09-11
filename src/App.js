@@ -15,16 +15,16 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
 
-          <Route path="/mentors" element={<MentorPage />} />
-          <Route path="/mentors/:groupId" element={<DaySelector />} />
+          <Route path="/batches" element={<MentorPage />} />
+          <Route path="/batches/:batchNo" element={<DaySelector />} />
           <Route
             path="/attendance/:groupId/:day/:time"
             element={<AttendancePage />}
           />
 
-          <Route path="/advisors" element={<AdvisorPage />} />
+          <Route path="/departments" element={<AdvisorPage />} />
           <Route
-            path="/departments/:advisorId"
+            path="/departments/:department"
             element={<DepartmentStudentsPage />}
           />
           <Route path="/student/:id" element={<StudentAttendancePage />} />

@@ -4,7 +4,7 @@ import { DAYS, dateFormatter } from "../helpers";
 const timeSlots = ["FORENOON", "AFTERNOON"];
 
 const DaySelector = () => {
-  const { groupId } = useParams();
+  const { batchNo } = useParams();
   const [expandedDays, setExpandedDays] = useState({});
   const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const DaySelector = () => {
   };
 
   const handleTimeSlotClick = (day, time) => {
-    navigate(`/attendance/${groupId}/${day}/${time}`);
+    navigate(`/attendance/${batchNo}/${day}/${time}`);
   };
 
   return (
