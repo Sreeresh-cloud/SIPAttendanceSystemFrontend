@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./MentorPage.css";
+import "./BatchesPage.css";
 
 const List = ({ length }) => {
   return (
@@ -14,7 +14,7 @@ const List = ({ length }) => {
   );
 };
 
-const MentorPage = () => {
+const BatchesPage = () => {
   return (
     <div className="mentor-page">
       <h1>Mentors</h1>
@@ -23,4 +23,4 @@ const MentorPage = () => {
   );
 };
 
-export default MentorPage;
+export default BatchesPage;

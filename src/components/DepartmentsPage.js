@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./AdvisorPage.css";
+import "./DepartmentsPage.css";
 import { DEPARTMENT_IDS, DEPARTMENTS } from "../helpers";
 
 const List = ({ departments }) => {
@@ -21,7 +21,7 @@ const List = ({ departments }) => {
   );
 };
 
-const AdvisorPage = () => {
+const DepartmentsPage = () => {
   return (
     <div className="advisor-page">
       <h1>Select a Department</h1>
@@ -30,4 +30,4 @@ const AdvisorPage = () => {
   );
 };
 
-export default AdvisorPage;
+export default DepartmentsPage;
