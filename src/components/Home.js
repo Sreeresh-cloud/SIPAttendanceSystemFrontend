@@ -17,7 +17,7 @@ const Home = () => {
 
       <section className="content" style={{ backgroundImage: `url(${background})` }}>
         <h3>SIP-CONNECT</h3>
-        <h4>STUDENT INDUCTION PROGRAMME ATTENDANCE MANAGEMENT SYSTEM</h4>
+        <h4>STUDENT INDUCTION PROGRAMME MANAGEMENT SYSTEM</h4>
         <div className="options">
           <Link to="/batches" className="btn btn-primary">
             Batches
