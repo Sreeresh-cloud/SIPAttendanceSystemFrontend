@@ -6,8 +6,8 @@ body {
   color: #333;
 }
 
-/* Batches Page */
-.batches-page {
+/* Day Selector Page */
+.day-selector {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -17,7 +17,7 @@ body {
 }
 
 /* Header Section */
-.batches-header {
+.day-selector-header {
   width: 100%;
   background: linear-gradient(45deg, #00274d, #004c99); /* Gradient background for header */
   color: white;
@@ -28,17 +28,16 @@ body {
   opacity: 0; /* Initially hidden */
   border-radius: 0 0 15px 15px;
 
-
 }
 
-.batches-header h1 {
+.day-selector-header h1 {
   margin: 0;
   font-size: 2.5rem;
   font-weight: bold;
 }
 
 /* Content Section */
-.batches-content {
+.day-selector-content {
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -47,62 +46,81 @@ body {
   animation: slideIn 1s ease-out forwards; /* Slide-in animation for content */
   animation-delay: 0.5s; /* Delay for content to appear after header */
   opacity: 0; /* Initially hidden */
+  margin-left: -10px;
 }
 
-.batch-list {
+.list-group {
   list-style: none;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
-  gap: 15px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 600px;
 }
 
-.batch-item {
+.list-group-item {
   background-color: #fff;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for items */
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
-  animation: slideIn 0.8s ease-out forwards; /* Slide-in animation for each batch */
-  animation-delay: 1s; /* Delay for batch items */
-  opacity: 0; /* Initially hidden */
+  margin-bottom: 15px;
 }
 
-.batch-item:hover {
+.list-group-item:hover {
   transform: translateY(-5px); /* Slight upward movement */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
 }
 
-.batch-link {
-  text-decoration: none;
-  font-weight: bold;
+.day-header {
   font-size: 1.2rem;
-  color: #004c99;
-  transition: color 0.3s ease; /* Smooth color change on hover */
+  cursor: pointer;
 }
 
-.batch-link:hover {
-  color: #ff1493; /* Fluorescent pink on hover */
+.timetable-wrapper {
+  max-height: 10;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.timetable {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.time-slot {
+  background-color: #004c99;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.time-slot:hover {
+  background-color: #ff1493; /* Fluorescent pink on hover */
 }
 
 /* Footer Section */
-.batches-footer {
+.day-selector-footer {
   background: linear-gradient(45deg, #00274d, #004c99); /* Same gradient as header */
   color: white;
   text-align: center;
   padding: 20px 0;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3); /* Upward shadow for footer */
   border-radius: 15px 15px 0 0; /* Rounded top corners for the footer */
-  animation: slideIn 1s ease-out forwards; 
 
 }
 
-.batches-footer p {
+.day-selector-footer p {
   margin: 5px 0;
   font-size: 0.9rem;
+}
+
+.footer-logos {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
 }
 
 .footer-logo {
@@ -146,11 +164,11 @@ body {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .batches-header h1 {
+  .day-selector-header h1 {
     font-size: 2rem;
   }
 
-  .batch-link {
-    font-size: 1rem;
+  .time-slot {
+    padding: 8px 15px;
   }
 }

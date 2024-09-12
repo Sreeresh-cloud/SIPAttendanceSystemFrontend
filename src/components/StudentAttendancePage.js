@@ -3,22 +3,21 @@ import { useParams } from "react-router-dom";
 import "./StudentAttendancePage.css";
 import axios from "../http-client";
 import { DAYS, dateFormatter } from "../helpers";
+import cc from "./images/codingclubtkmce.jpg"
+import foss from "./images/foss-logo.png"
+
 
 const calculateAttendanceStats = (attendanceData) => {
   let totalSessions = 0;
   let attendedSessions = 0;
 
   for (const dayData of attendanceData) {
-    const daySessions =
-      (dayData.fnAttendance ? 1 : 0) + (dayData.anAttendance ? 1 : 0);
+    const daySessions = (dayData.fnAttendance ? 1 : 0) + (dayData.anAttendance ? 1 : 0);
     totalSessions += 2;
     attendedSessions += daySessions;
   }
 
-  const attendancePercentage = (
-    (attendedSessions / totalSessions) *
-    100
-  ).toFixed(2);
+  const attendancePercentage = ((attendedSessions / totalSessions) * 100).toFixed(2);
 
   return {
     attendancePercentage,
@@ -32,8 +31,7 @@ const StudentAttendancePage = () => {
   const [studentData, setStudentData] = useState({});
   const [attendanceData, setAttendanceData] = useState([]);
   const [hasMountedData, setHasMountedData] = useState(false);
-  const [hasMountedAttendanceData, setHasMountedAttendanceData] =
-    useState(false);
+  const [hasMountedAttendanceData, setHasMountedAttendanceData] = useState(false);
 
   useEffect(() => {
     try {
@@ -77,12 +75,14 @@ const StudentAttendancePage = () => {
     return <p>Couldn't find details of the student.</p>;
   }
 
-  const { attendancePercentage, sessionsAttended, totalSessions } =
-    calculateAttendanceStats(attendanceData);
+  const { attendancePercentage, sessionsAttended, totalSessions } = calculateAttendanceStats(attendanceData);
 
   return (
     <div className="student-attendance-page">
-      <h1>{studentData.name}</h1>
+      <header className="attendance-header">
+        <h1>{studentData.name}</h1>
+      </header>
+
       {!hasMountedAttendanceData ? (
         <p>Loading attendance data...</p>
       ) : (
@@ -96,14 +96,10 @@ const StudentAttendancePage = () => {
               <div key={dayData.date} className="day-card">
                 <h3>{dateFormatter.format(new Date(dayData.date))}</h3>
                 <div className="session-card">
-                  <div
-                    className={`session ${dayData.fnAttendance ? "present" : "absent"}`}
-                  >
+                  <div className={`session ${dayData.fnAttendance ? "present" : "absent"}`}>
                     Forenoon
                   </div>
-                  <div
-                    className={`session ${dayData.anAttendance ? "present" : "absent"}`}
-                  >
+                  <div className={`session ${dayData.anAttendance ? "present" : "absent"}`}>
                     Afternoon
                   </div>
                 </div>
@@ -112,6 +108,15 @@ const StudentAttendancePage = () => {
           })}
         </>
       )}
+
+      <footer className="attendance-footer">
+        <p>&copy; 2024 TKMCE. All rights reserved.</p>
+        <p>Powered by</p>
+        <div className="footer-logos">
+        <img src={cc} alt="Coding Club Logo" className="footer-logo" />
+        <img src={foss} alt="FOSS Logo" className="footer-logo" />
+        </div>
+      </footer>
     </div>
   );
 };

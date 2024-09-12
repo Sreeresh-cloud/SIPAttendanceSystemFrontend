@@ -1,0 +1,135 @@
+/* Importing a professional Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Global Styles */
+body, html {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif; /* Professional font */
+}
+
+/* Page Container */
+.department-students-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 0 15px;
+  background-color: #f4f4f4;
+}
+
+/* Header Section */
+.department-header {
+    width: 100%;
+    background: linear-gradient(135deg, #003366, #0066cc); /* Contrasting gradient from dark blue to a lighter blue */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 14px 10px rgba(0, 0, 0, 0.3); 
+    border-radius: 0 0 15px 15px; /* Rounded bottom corners for the header */
+
+  }
+
+.department-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+/* Table Styles */
+.table {
+  width: 100%;
+  margin: 20px 0;
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #004c99;
+  color: white;
+  font-weight: bold;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Footer Section */
+.department-footer {
+    background: linear-gradient(45deg, #00274d, #004c99); /* More contrasting gradient */
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 -14px 8px rgba(0, 0, 0, 0.3); 
+    border-radius: 15px 15px 0 0; /* Rounded top corners for the footer */
+
+}
+
+.department-footer p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.footer-logos {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.footer-logo {
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.footer-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 768px) {
+  .department-header h1 {
+    font-size: 2rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .footer-logo {
+    height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .department-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  .footer-logo {
+    height: 25px;
+  }
+}

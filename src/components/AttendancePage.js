@@ -2,7 +2,8 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import "./AttendancePage.css";
 import axios from "../http-client";
-
+import ccLogo from "./images/codingclubtkmce.jpg"; 
+import fossLogo from "./images/foss-logo.png"; 
 const AttendanceListRow = ({ student, present, onToggle }) => {
   return (
     <tr key={student.id}>
@@ -24,26 +25,24 @@ const AttendancePage = () => {
   const { groupId, day: date, time } = useParams();
   const [hasMountedData, setHasMountedData] = useState(false);
   const [attendance, setAttendance] = useState([]);
-
   const [oldData, setOldData] = useState({});
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [updateStatus, setUpdateStatus] = useState("");
 
   const attendancePropKey = useMemo(() => {
     return time === "FORENOON" ? "fnAttendance" : "anAttendance";
   }, [time]);
 
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [updateStatus, setUpdateStatus] = useState("");
-
   useEffect(() => {
     async function getAttendanceData() {
       try {
         const { data: students } = await axios.get(`/group/${groupId}`);
-        if (students == null || !Array.isArray(students)) return;
+        if (!Array.isArray(students)) return;
 
         const { data: attendanceData } = await axios.get(
           `/group/${groupId}/${date}`
         );
-        if (attendanceData == null || !Array.isArray(attendanceData)) return;
+        if (!Array.isArray(attendanceData)) return;
 
         const organized = attendanceData.reduce((prev, attendance) => {
           prev[attendance.student.id] = {
@@ -58,13 +57,11 @@ const AttendancePage = () => {
         setAttendance(
           students
             .sort((s1, s2) => s1.name.localeCompare(s2.name))
-            .map((student) => {
-              return {
-                student: student,
-                fnAttendance: organized[student.id]?.fnAttendance ?? true,
-                anAttendance: organized[student.id]?.anAttendance ?? true,
-              };
-            })
+            .map((student) => ({
+              student,
+              fnAttendance: organized[student.id]?.fnAttendance ?? true,
+              anAttendance: organized[student.id]?.anAttendance ?? true,
+            }))
         );
 
         setHasMountedData(true);
@@ -85,9 +82,7 @@ const AttendancePage = () => {
 
   const handleUpdate = async () => {
     setIsUpdating(true);
-
     try {
-      // TODO: fix this after fixing in backend
       for (const data of attendance) {
         const initial = {
           fnAttendance: oldData[data.student.id]?.fnAttendance ?? true,
@@ -123,41 +118,56 @@ const AttendancePage = () => {
 
   return (
     <div className="attendance-page">
-      <h1>
-        {groupId} - {date} - {time}
-      </h1>
+      <header className="attendance-header">
+        <h1>Attendance Marker</h1>
+      </header>
 
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Department</th>
-            <th>Attendance</th>
-          </tr>
-        </thead>
-        <tbody>
-          {attendance.map((data, i) => (
-            <AttendanceListRow
-              key={data.student.id}
-              student={data.student}
-              onToggle={() => toggleAttendance(i)}
-              present={data[attendancePropKey]}
-            />
-          ))}
-        </tbody>
-      </table>
+      <section className="attendance-content">
+        <h1 className="attendance-title">
+          Batch{groupId} - {date} - {time}
+        </h1>
 
-      <div className="update-button-container">
-        <button
-          className={`btn-update ${isUpdating ? "loading" : ""}`}
-          onClick={handleUpdate}
-          disabled={isUpdating}
-        >
-          {isUpdating ? "Updating..." : "Update Attendance"}
-        </button>
-      </div>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Department</th>
+              <th>Attendance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {attendance.map((data, i) => (
+              <AttendanceListRow
+                key={data.student.id}
+                student={data.student}
+                onToggle={() => toggleAttendance(i)}
+                present={data[attendancePropKey]}
+              />
+            ))}
+          </tbody>
+        </table>
 
-      {updateStatus && <div>{updateStatus}</div>}
+        <div className="update-button-container">
+          <button
+            className={`btn-update ${isUpdating ? "loading" : ""}`}
+            onClick={handleUpdate}
+            disabled={isUpdating}
+          >
+            {isUpdating ? "Updating..." : "Update Attendance"}
+          </button>
+        </div>
+
+        {updateStatus && <div className="update-status">{updateStatus}</div>}
+      </section>
+
+      <footer className="attendance-footer">
+        <p>&copy; 2024 TKMCE. All rights reserved.</p>
+        <p>Powered by</p>
+        <div className="footer-logos">
+          <img src={ccLogo} alt="Coding Club TKMCE Logo" className="footer-logo cc-logo" />
+          <img src={fossLogo} alt="FOSS TKMCE Logo" className="footer-logo" />
+        </div>
+      </footer>
     </div>
   );
 };
