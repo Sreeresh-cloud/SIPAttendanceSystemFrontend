@@ -16,9 +16,8 @@ const Home = () => {
       </header>
 
       <section className="content" style={{ backgroundImage: `url(${background})` }}>
-        <h3>SYNERGOS'24</h3>
-        <h4>STUDENT INDUCTION PROGRAMME 2024</h4>
-        <h5>ATTENDANCE SYSTEM</h5>
+        <h3>SIP-CONNECT</h3>
+        <h4>STUDENT INDUCTION PROGRAMME ATTENDANCE MANAGEMENT SYSTEM</h4>
         <div className="options">
           <Link to="/batches" className="btn btn-primary">
             Batches
@@ -34,8 +33,8 @@ const Home = () => {
         <p>Powered by</p>
         <div className="footer-logos">
           <img src={cc} alt="Coding Club TKMCE Logo" className="footer-logo cc-logo" />
-          <img src={foss} alt="FOSS TKMCE Logo" className="footer-logo" />
-        </div>
+          <img src={foss} alt="FOSS TKMCE Logo" className="footer-logo foss-logo" />
+          </div>
       </footer>
     </div>
   );

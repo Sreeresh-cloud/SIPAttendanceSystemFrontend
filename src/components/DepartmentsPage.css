@@ -109,15 +109,14 @@ body, html {
 }
 
 .footer-logo {
-  width: 40px;
-  vertical-align: middle;
+  height: auto;
   transition: transform 0.3s ease;
+  width: 120px; /* Default width for other logos */
 }
 
-.footer-logo:hover {
-  transform: scale(1.1);
+.footer-logo.cc-logo {
+  width: 100px; /* Increase the width of the Coding Club logo */
 }
-
 /* Ensure the header and footer touch the edges */
 header, footer {
   width: 100vw;

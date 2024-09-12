@@ -97,15 +97,6 @@ body {
   animation-delay: 0.7s;
 }
 
-.content h5 {
-  font-size: 1.2rem;
-  color: #ff073a; /* Fluorescent red */
-  /* Fluorescent blue */
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 20, 147, 0.8); /* Glow effect */
-  margin-bottom: 30px;
-  animation-delay: 0.9s;
-  font-weight: 900;
-}
 
 /* Button styling without animations */
 .options {
@@ -156,18 +147,15 @@ body {
 }
 
 .footer-logo {
-  width: 1200px;
   height: auto;
   transition: transform 0.3s ease;
+  width: 120px; /* Default width for other logos */
 }
 
-.footer-logo:hover {
-  transform: scale(2); /* Enlarge on hover */
+.footer-logo.cc-logo {
+  width: 100px; /* Increase the width of the Coding Club logo */
 }
 
-.footer-logo .cc-logo {
-  width: 120px;
-}
 
 /* ANIMATIONS */
 
