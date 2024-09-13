@@ -108,6 +108,30 @@ body, html {
   font-weight: 500;
 }
 
+.certificate-box {
+  border: 1px solid #4caf50;
+  background-color: #e8f5e9;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.certificate-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.certificate-link:hover {
+  background-color: #388e3c;
+}
+
+
 /* Session Card Styles */
 .session-card {
   display: flex;

@@ -3,9 +3,8 @@ import { useParams } from "react-router-dom";
 import "./StudentAttendancePage.css";
 import axios from "../http-client";
 import { DAYS, dateFormatter } from "../helpers";
-import cc from "./images/codingclubtkmce.jpg"
-import foss from "./images/foss-logo.png"
-
+import cc from "./images/codingclubtkmce.jpg";
+import foss from "./images/foss-logo.png";
 
 const calculateAttendanceStats = (attendanceData) => {
   let totalSessions = 0;
@@ -91,6 +90,24 @@ const StudentAttendancePage = () => {
           <p>
             Sessions Attended: {sessionsAttended}/{totalSessions}
           </p>
+
+          {/* Conditionally render the message and certificate link if attendance is 75% or more */}
+          {attendancePercentage >= 75 && (
+            <div className="certificate-box">
+              <p>
+                {studentData.name} is eligible for the Student Induction Programme participation Certificate.
+              </p>
+              <a
+                href="https://drive.google.com/file/d/1gXr3WE7artMznM__qoYSH2uwSflCc9ku/view?usp=drivesdk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="certificate-link"
+              >
+                Get Certificate
+              </a>
+            </div>
+          )}
+
           {attendanceData.map((dayData) => {
             return (
               <div key={dayData.date} className="day-card">
@@ -113,8 +130,8 @@ const StudentAttendancePage = () => {
         <p>&copy; 2024 TKMCE. All rights reserved.</p>
         <p>Powered by</p>
         <div className="footer-logos">
-        <img src={cc} alt="Coding Club Logo" className="footer-logo" />
-        <img src={foss} alt="FOSS Logo" className="footer-logo" />
+          <img src={cc} alt="Coding Club Logo" className="footer-logo cc-logo" />
+          <img src={foss} alt="FOSS Logo" className="footer-logo" />
         </div>
       </footer>
     </div>

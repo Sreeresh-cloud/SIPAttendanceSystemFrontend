@@ -37,8 +37,8 @@ const DepartmentsPage = () => {
         <p>&copy; 2024 TKMCE. All rights reserved.</p>
         <p>Powered by</p>
         <div className="footer-logos">
-        <img src={cc} alt="Coding Club Logo" className="footer-logo" />
-        <img src={foss} alt="FOSS Logo" className="footer-logo" />
+        <img src={cc} alt="Coding Club Logo" className="footer-logo cc-logo" />
+        <img src={foss} alt="FOSS Logo" className="footer-logo " />
         </div>
       </footer>
     </div>

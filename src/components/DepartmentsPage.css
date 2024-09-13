@@ -8,7 +8,30 @@ body, html {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif; /* Use professional font */
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Keyframes for animations */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Advisor Page Styles */
@@ -22,17 +45,20 @@ body, html {
   padding: 0 15px;
 }
 
+/* Header animation */
 .advisor-header {
-    width: 100%;
-    background: linear-gradient(135deg, #003366, #0066cc); /* Contrasting gradient from dark blue to a lighter blue */
-    color: white;
-    padding: 20px ;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 14px 10px rgba(0, 0, 0, 0.3); 
-    border-radius: 0 0 15px 15px; /* Rounded bottom corners for the header */
+  width: 100%;
+  background: linear-gradient(135deg, #003366, #0066cc);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 14px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 0 0 15px 15px;
+  opacity: 0; /* Start hidden */
+  animation: fadeInScale 0.8s ease-in-out forwards;
 }
 
 .advisor-header h1 {
@@ -41,7 +67,7 @@ body, html {
   font-weight: bold;
 }
 
-/* Content Section */
+/* Content animation */
 .advisor-content {
   margin-top: 20px;
   padding: 20px;
@@ -49,6 +75,8 @@ body, html {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  opacity: 0; /* Start hidden */
+  animation: fadeInScale 1s ease-in-out 0.3s forwards; /* Add a slight delay */
 }
 
 .list-group {
@@ -56,7 +84,7 @@ body, html {
   padding: 0;
   width: 100%;
   max-width: 600px;
-  margin: 0 auto; /* Center the list group */
+  margin: 0 auto;
 }
 
 .card {
@@ -69,31 +97,35 @@ body, html {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   word-wrap: break-word;
-  color: #004c99; /* Professional blue for department names */
-  font-weight: 500; /* Slightly bold for emphasis */
-  letter-spacing: 0.5px; /* Slightly increase letter spacing */
+  color: #004c99;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   font-size: 1.2rem;
+  opacity: 0;
+  animation: fadeInScale 0.6s ease-in-out 0.5s forwards; /* Delay for the card */
 }
 
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  color: #00274d; /* Darken the text on hover for better effect */
+  color: #00274d;
 }
 
 .card:active {
-  background-color: #f0f0f0; /* Subtle background change on click */
+  background-color: #f0f0f0;
 }
 
-/* Footer Section */
+/* Footer animation */
 .advisor-footer {
-  background: linear-gradient(45deg, #00274d, #004c99); /* More contrasting gradient */
-    color: white;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    box-shadow: 0 -14px 8px rgba(0, 0, 0, 0.3); 
-    border-radius: 15px 15px 0 0; /* Rounded top corners for the footer */
+  background: linear-gradient(45deg, #00274d, #004c99);
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 -14px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 15px 15px 0 0;
+  opacity: 0;
+  animation: slideInFromBottom 0.8s ease-in-out 0.5s forwards;
 }
 
 .advisor-footer p {
@@ -111,13 +143,13 @@ body, html {
 .footer-logo {
   height: auto;
   transition: transform 0.3s ease;
-  width: 120px; /* Default width for other logos */
+  width: 120px;
 }
 
 .footer-logo.cc-logo {
-  width: 100px; /* Increase the width of the Coding Club logo */
+  width: 100px;
 }
-/* Ensure the header and footer touch the edges */
+
 header, footer {
   width: 100vw;
   margin: 0;
@@ -127,7 +159,7 @@ header, footer {
   left: 0;
 }
 
-/* Media Queries for Responsive Design */
+/* Media Queries */
 @media (max-width: 768px) {
   .advisor-header h1 {
     font-size: 2rem;

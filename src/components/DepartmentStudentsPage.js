@@ -75,7 +75,7 @@ const DepartmentStudentsPage = () => {
         <p>Powered by </p>
         <div className="footer-logos">
           {/* Placeholder for logos, replace src with your actual paths */}
-          <img src={cc} alt="Coding Club Logo" className="footer-logo" />
+          <img src={cc} alt="Coding Club Logo" className="footer-logo cc-logo" />
           <img src={foss} alt="FOSS Logo" className="footer-logo" />
         </div>
       </footer>
