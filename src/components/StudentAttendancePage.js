@@ -98,7 +98,7 @@ const StudentAttendancePage = () => {
                 {studentData.name} is eligible for the Student Induction Programme participation Certificate.
               </p>
               <a
-                href="https://drive.google.com/file/d/1gXr3WE7artMznM__qoYSH2uwSflCc9ku/view?usp=drivesdk"
+                href="https://drive.google.com/file/d/1KZ8403PdZHkztkrr6cH3ryoll0JGyYVN/view?usp=drivesdk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="certificate-link"
@@ -130,8 +130,12 @@ const StudentAttendancePage = () => {
         <p>&copy; 2024 TKMCE. All rights reserved.</p>
         <p>Powered by</p>
         <div className="footer-logos">
-          <img src={cc} alt="Coding Club Logo" className="footer-logo cc-logo" />
-          <img src={foss} alt="FOSS Logo" className="footer-logo" />
+        <a href="https://www.instagram.com/codingclub_tkmce?igsh=OTZjaHBqdDBnNXE2" target="_blank" rel="noopener noreferrer">
+            <img src={cc} alt="Coding Club TKMCE Logo" className="footer-logo cc-logo" />
+          </a>
+          <a href="https://www.instagram.com/tkmcefosscell?igsh=ZTlreWpsemF0eXN3" target="_blank" rel="noopener noreferrer">
+            <img src={foss} alt="FOSS TKMCE Logo" className="footer-logo foss-logo" />
+          </a>
         </div>
       </footer>
     </div>
