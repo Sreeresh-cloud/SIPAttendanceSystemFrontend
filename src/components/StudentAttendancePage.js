@@ -66,6 +66,56 @@ const StudentAttendancePage = () => {
     }
   }, [studentId, hasMountedData, attendanceData]);
 
+  const toggleAttendance = (date, session) => {
+    setAttendanceData((prevData) =>
+      prevData.map((dayData) => {
+        if (dayData.date === date) {
+          return {
+            ...dayData,
+            [session]: !dayData[session], // Toggle the session attendance
+          };
+        }
+        return dayData;
+      })
+    );
+  };
+
+  const handleUpdate = async () => {
+    setIsUpdating(true);
+    try {
+      for (const data of attendance) {
+        const initial = {
+          fnAttendance: oldData[data.student.id]?.fnAttendance ?? true,
+          anAttendance: oldData[data.student.id]?.anAttendance ?? true,
+        };
+
+        if (
+          data.fnAttendance === initial.fnAttendance &&
+          data.anAttendance === initial.anAttendance
+        )
+          continue;
+        const arr = [];
+        arr.push({studentId: data.student.id,
+          date: date,
+          fnAttendance: data.fnAttendance,
+          anAttendance: data.anAttendance,})
+        await axios.patch("", );
+
+        oldData[data.student.id] = {
+          fnAttendance: data.fnAttendance,
+          anAttendance: data.anAttendance,
+        };
+      }
+      setUpdateStatus("Updated successfully!");
+    } catch (error) {
+      console.error(error);
+      setUpdateStatus("Failed to update.");
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+
   if (!hasMountedData) {
     return <p>Loading...</p>;
   }
@@ -91,7 +141,6 @@ const StudentAttendancePage = () => {
             Sessions Attended: {sessionsAttended}/{totalSessions}
           </p>
 
-          {/* Conditionally render the message and certificate link if attendance is 75% or more */}
           {attendancePercentage >= 75 && (
             <div className="certificate-box">
               <p>
@@ -113,16 +162,27 @@ const StudentAttendancePage = () => {
               <div key={dayData.date} className="day-card">
                 <h3>{dateFormatter.format(new Date(dayData.date))}</h3>
                 <div className="session-card">
-                  <div className={`session ${dayData.fnAttendance ? "present" : "absent"}`}>
+                  <button
+                    className={`session ${dayData.fnAttendance ? "present" : "absent"}`}
+                    onClick={() => toggleAttendance(dayData.date, "fnAttendance")}
+                  >
                     Forenoon
-                  </div>
-                  <div className={`session ${dayData.anAttendance ? "present" : "absent"}`}>
+                  </button>
+                  <button
+                    className={`session ${dayData.anAttendance ? "present" : "absent"}`}
+                    onClick={() => toggleAttendance(dayData.date, "anAttendance")}
+                  >
                     Afternoon
-                  </div>
+                  </button>
                 </div>
               </div>
             );
           })}
+
+          {/* Update button */}
+          <button className="update-button" onClick={handleUpdate}>
+            Update Attendance
+          </button>
         </>
       )}
 
@@ -130,7 +190,7 @@ const StudentAttendancePage = () => {
         <p>&copy; 2024 TKMCE. All rights reserved.</p>
         <p>Powered by</p>
         <div className="footer-logos">
-        <a href="https://www.instagram.com/codingclub_tkmce?igsh=OTZjaHBqdDBnNXE2" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/codingclub_tkmce?igsh=OTZjaHBqdDBnNXE2" target="_blank" rel="noopener noreferrer">
             <img src={cc} alt="Coding Club TKMCE Logo" className="footer-logo cc-logo" />
           </a>
           <a href="https://www.instagram.com/tkmcefosscell?igsh=ZTlreWpsemF0eXN3" target="_blank" rel="noopener noreferrer">

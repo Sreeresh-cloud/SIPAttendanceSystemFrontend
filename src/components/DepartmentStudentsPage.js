@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "../http-client";
 import { DEPARTMENTS } from "../helpers";
-import "./DepartmentStudentsPage.css"; // Assuming there's a CSS file for the page
+import "./DepartmentStudentsPage.css"; 
 import cc from "./images/codingclubtkmce.jpg"
 import foss from "./images/foss-logo.png"
 

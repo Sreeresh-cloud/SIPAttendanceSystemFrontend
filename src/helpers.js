@@ -19,7 +19,7 @@ export const dateFormatter = new Intl.DateTimeFormat("en-IN", {
 
 export const DEPARTMENTS = {
   ARCH: "Bachelor of Architecture",
-  CHEMICAL: "Chemical Engineering",
+  CHE: "Chemical Engineering",
   CIVIL: "Civil Engineering",
   CSE: "Computer Science and Engineering",
   "CSE-AI": "Computer Science and Engineering (AI)",

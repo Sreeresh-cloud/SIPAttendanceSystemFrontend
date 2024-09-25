@@ -94,13 +94,13 @@ const AttendancePage = () => {
           data.anAttendance === initial.anAttendance
         )
           continue;
-
-        await axios.patch("", {
+        const arr = [];
+        arr.push({
           studentId: data.student.id,
           date: date,
           fnAttendance: data.fnAttendance,
-          anAttendance: data.anAttendance,
-        });
+          anAttendance: data.anAttendance,})
+        await axios.patch("", );
 
         oldData[data.student.id] = {
           fnAttendance: data.fnAttendance,
