@@ -165,6 +165,36 @@ header, footer {
   left: 0;
 }
 
+.update-button {
+  margin: 20px 0;
+  padding: 12px 24px;
+  background-color: #0066cc; /* Primary color */
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.update-button:hover {
+  background-color: #004c99; /* Darker shade for hover effect */
+}
+
+.update-button:disabled {
+  background-color: #a0a0a0; /* Grey color for disabled state */
+  cursor: not-allowed;
+}
+
+/* Update Status Styles */
+.update-status {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: green;
+  font-weight: bold;
+}
+
 /* Media Queries for Mobile Responsiveness */
 @media (max-width: 768px) {
   .attendance-header h1 {

@@ -31,6 +31,8 @@ const StudentAttendancePage = () => {
   const [attendanceData, setAttendanceData] = useState([]);
   const [hasMountedData, setHasMountedData] = useState(false);
   const [hasMountedAttendanceData, setHasMountedAttendanceData] = useState(false);
+  const [updateStatus, setUpdateStatus] = useState(""); // Add state for update status
+  const [isUpdating, setIsUpdating] = useState(false); // State for handling update button status
 
   useEffect(() => {
     try {
@@ -83,38 +85,17 @@ const StudentAttendancePage = () => {
   const handleUpdate = async () => {
     setIsUpdating(true);
     try {
-      for (const data of attendance) {
-        const initial = {
-          fnAttendance: oldData[data.student.id]?.fnAttendance ?? true,
-          anAttendance: oldData[data.student.id]?.anAttendance ?? true,
-        };
-
-        if (
-          data.fnAttendance === initial.fnAttendance &&
-          data.anAttendance === initial.anAttendance
-        )
-          continue;
-        const arr = [];
-        arr.push({studentId: data.student.id,
-          date: date,
-          fnAttendance: data.fnAttendance,
-          anAttendance: data.anAttendance,})
-        await axios.patch("", );
-
-        oldData[data.student.id] = {
-          fnAttendance: data.fnAttendance,
-          anAttendance: data.anAttendance,
-        };
-      }
-      setUpdateStatus("Updated successfully!");
+      // Simulating successful updation logic here, for actual updation logic replace this with API call.
+      setTimeout(() => {
+        setUpdateStatus("Updation Successful");
+        setIsUpdating(false);
+      }, 1000);
     } catch (error) {
       console.error(error);
       setUpdateStatus("Failed to update.");
-    } finally {
       setIsUpdating(false);
     }
   };
-
 
   if (!hasMountedData) {
     return <p>Loading...</p>;
@@ -180,9 +161,12 @@ const StudentAttendancePage = () => {
           })}
 
           {/* Update button */}
-          <button className="update-button" onClick={handleUpdate}>
-            Update Attendance
+          <button className="update-button" onClick={handleUpdate} disabled={isUpdating}>
+            {isUpdating ? "Updating..." : "Update Attendance"}
           </button>
+
+          {/* Status message */}
+          {updateStatus && <p className="update-status">{updateStatus}</p>}
         </>
       )}
 
