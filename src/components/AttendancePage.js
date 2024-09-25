@@ -100,7 +100,8 @@ const AttendancePage = () => {
           date: date,
           fnAttendance: data.fnAttendance,
           anAttendance: data.anAttendance,})
-        await axios.patch("", );
+
+        await axios.patch("", arr);
 
         oldData[data.student.id] = {
           fnAttendance: data.fnAttendance,
