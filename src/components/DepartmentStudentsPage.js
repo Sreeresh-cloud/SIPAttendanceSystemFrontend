@@ -17,6 +17,7 @@ const StudentsTable = ({ students }) => {
         <tr>
           <th>Name</th>
           <th>Application Number</th>
+          <th>Attendance %</th>
           <th>SIP Group</th>
         </tr>
       </thead>
@@ -25,6 +26,7 @@ const StudentsTable = ({ students }) => {
           <tr key={student.admissionNo} onClick={() => handleClick(student)}>
             <td>{student.name}</td>
             <td>{student.admissionNo}</td>
+            <td>{student.attendancePercentage.toFixed(2)}</td>
             <td>{student.group}</td>
           </tr>
         ))}
@@ -37,6 +39,16 @@ const DepartmentStudentsPage = () => {
   const { department } = useParams();
   const [hasMountedData, setHasMountedData] = useState(false);
   const [students, setStudents] = useState([]);
+  const [filter, setFilter] = useState("all");
+
+  const calculateAverageAttendance = (students) => {
+    if (students.length === 0) return 0; // Handle the case when there are no students
+    const totalAttendance = students.reduce(
+      (total, student) => total + student.attendancePercentage, 
+      0
+    );
+    return (totalAttendance / students.length).toFixed(2); // Rounded to 2 decimal places
+  };
 
   useEffect(() => {
     async function getStudentsData() {
@@ -52,6 +64,18 @@ const DepartmentStudentsPage = () => {
     if (!hasMountedData) getStudentsData();
   }, [department, hasMountedData]);
 
+  const averageAttendance = calculateAverageAttendance(students);
+
+  const getFilteredStudents = () => {
+    if (filter === "eligible") {
+      return students.filter(student => student.attendancePercentage >= 75);
+    } else if (filter === "not-eligible") {
+      return students.filter(student => student.attendancePercentage < 75);
+    }
+    return students; // "all" case
+  };
+
+
   return (
     <div className="department-students-page">
       {/* Header Section */}
@@ -59,11 +83,24 @@ const DepartmentStudentsPage = () => {
         <h1>Students in {DEPARTMENTS[department]} Department</h1>
       </header>
 
+      <div className="average-attendance">
+              <p>Average Attendance: {averageAttendance}%</p>
+      </div>
+
+      <div className="filter-section">
+  <label htmlFor="filter">Filter: </label>
+  <select id="filter" value={filter} onChange={(e) => setFilter(e.target.value)}>
+    <option value="all">All</option>
+    <option value="eligible">Eligible (Attendance ≥ 75%)</option>
+    <option value="not-eligible">Not Eligible (Attendance &lt; 75%)</option>
+  </select>
+</div>
+
       <div className="department-content">
         {!hasMountedData ? (
           <p>Loading student data...</p>
         ) : students.length > 0 ? (
-          <StudentsTable students={students} />
+          <StudentsTable students={getFilteredStudents()} />
         ) : (
           <p>No students available for {DEPARTMENTS[department]}</p>
         )}

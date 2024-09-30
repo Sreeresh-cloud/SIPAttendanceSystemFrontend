@@ -90,6 +90,66 @@ body, html {
   transition: background-color 0.3s ease;
 }
 
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Apply the opacity fade-in without changing the translateX */
+.filter-section {
+  display: flex;
+  align-items: center;
+  transform: translateX(1160px); /* Existing horizontal transform */
+  opacity: 0; /* Initial state */
+  animation: fadeInOpacity 1.2s ease-in-out forwards; /* Only fade-in effect */
+}
+
+.filter-section label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.filter-section select {
+  padding: 8px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.filter-section select:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: #fff;
+}
+
+/* Average Attendance Section */
+.average-attendance {
+  background-color: #f8f9fa;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(520px); /* Existing horizontal transform */
+  opacity: 0; /* Initial state */
+  animation: fadeInOpacity 1.4s ease-in-out forwards; /* Fade-in effect with delay */
+}
+
+.average-attendance p {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  margin: 0;
+}
+
 /* Footer Section */
 .department-footer {
   background: linear-gradient(45deg, #00274d, #004c99); /* Contrasting gradient */

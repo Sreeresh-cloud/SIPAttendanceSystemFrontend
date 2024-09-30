@@ -22,11 +22,12 @@ export const DEPARTMENTS = {
   CHE: "Chemical Engineering",
   CIVIL: "Civil Engineering",
   CSE: "Computer Science and Engineering",
-  "CSE-AI": "Computer Science and Engineering (AI)",
   ECE: "Electronics and Communication Engineering",
   EEE: "Electrical and Electronics Engineering",
   ER: "Electrical and Computer Engineering",
   ME: "Mechanical Engineering",
+  "CSE-AI": "Computer Science and Engineering (AI)"
+  
 };
 
 export const DEPARTMENT_IDS = Object.keys(DEPARTMENTS);
