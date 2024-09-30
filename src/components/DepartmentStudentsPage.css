@@ -38,7 +38,7 @@ body, html {
 /* Header Section */
 .department-header {
   width: 100%;
-  background: linear-gradient(135deg, #003366, #0066cc); /* Contrasting gradient from dark blue to a lighter blue */
+  background: linear-gradient(135deg, #003366, #0066cc); /* Contrasting gradient */
   color: white;
   padding: 20px;
   text-align: center;
@@ -90,7 +90,6 @@ body, html {
   transition: background-color 0.3s ease;
 }
 
-
 @keyframes fadeInOpacity {
   0% {
     opacity: 0;
@@ -100,13 +99,14 @@ body, html {
   }
 }
 
-/* Apply the opacity fade-in without changing the translateX */
+/* Filter Section */
 .filter-section {
   display: flex;
   align-items: center;
-  transform: translateX(1160px); /* Existing horizontal transform */
+  transform: translateX(0); /* Reset transform for mobile view */
   opacity: 0; /* Initial state */
   animation: fadeInOpacity 1.2s ease-in-out forwards; /* Only fade-in effect */
+  margin-bottom: 20px; /* Add margin for better spacing */
 }
 
 .filter-section label {
@@ -138,7 +138,7 @@ body, html {
   text-align: center;
   max-width: 400px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transform: translateX(520px); /* Existing horizontal transform */
+  transform: translateX(0); /* Reset transform for mobile view */
   opacity: 0; /* Initial state */
   animation: fadeInOpacity 1.4s ease-in-out forwards; /* Fade-in effect with delay */
 }
@@ -201,6 +201,21 @@ body, html {
 
   .footer-logo {
     height: 30px;
+  }
+
+  /* Adjustments for filter section and average attendance */
+  .filter-section {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align to the start */
+  }
+
+  .filter-section select {
+    width: 100%; /* Full width for select */
+  }
+
+  .average-attendance {
+    max-width: 90%; /* Allow more width on smaller screens */
+    margin: 0 auto; /* Center the section */
   }
 }
 
