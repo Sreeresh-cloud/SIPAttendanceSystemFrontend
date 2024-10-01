@@ -166,7 +166,7 @@ body, html {
   justify-content: center; 
   max-width: 400px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transform: translateX(580px); /* Reset transform for mobile view */
+  transform: translateX(600px); /* Reset transform for mobile view */
   opacity: 0; /* Initial state */
   animation: fadeInOpacity 1.4s ease-in-out forwards; /* Fade-in effect with delay */
 }
