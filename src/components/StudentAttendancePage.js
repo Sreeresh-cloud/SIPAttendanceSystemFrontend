@@ -29,10 +29,11 @@ const StudentAttendancePage = () => {
   const { id: studentId } = useParams();
   const [studentData, setStudentData] = useState({});
   const [attendanceData, setAttendanceData] = useState([]);
+  const [oldData, setOldData] = useState([]); // New state for tracking original data
   const [hasMountedData, setHasMountedData] = useState(false);
   const [hasMountedAttendanceData, setHasMountedAttendanceData] = useState(false);
-  const [updateStatus, setUpdateStatus] = useState(""); // Add state for update status
-  const [isUpdating, setIsUpdating] = useState(false); // State for handling update button status
+  const [updateStatus, setUpdateStatus] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
     try {
@@ -57,6 +58,7 @@ const StudentAttendancePage = () => {
           );
 
           setAttendanceData(attendanceData);
+          setOldData(attendanceData); // Set initial old data
           setHasMountedAttendanceData(true);
         } catch (error) {
           console.error(error);
@@ -74,7 +76,7 @@ const StudentAttendancePage = () => {
         if (dayData.date === date) {
           return {
             ...dayData,
-            [session]: !dayData[session], // Toggle the session attendance
+            [session]: !dayData[session],
           };
         }
         return dayData;
@@ -85,14 +87,34 @@ const StudentAttendancePage = () => {
   const handleUpdate = async () => {
     setIsUpdating(true);
     try {
-      // Simulating successful updation logic here, for actual updation logic replace this with API call.
-      setTimeout(() => {
-        setUpdateStatus("Updation Successful");
-        setIsUpdating(false);
-      }, 1000);
+      const updatedAttendance = attendanceData.filter(dayData => {
+        const oldDayData = oldData.find(od => od.date === dayData.date);
+        return (
+          !oldDayData ||
+          oldDayData.fnAttendance !== dayData.fnAttendance ||
+          oldDayData.anAttendance !== dayData.anAttendance
+        );
+      });
+  
+      if (updatedAttendance.length > 0) {
+        const updatePayload = updatedAttendance.map(dayData => ({
+          studentId,
+          date: dayData.date,
+          fnAttendance: dayData.fnAttendance,
+          anAttendance: dayData.anAttendance,
+        }));
+  
+        await axios.patch("", updatePayload);
+  
+        setOldData(attendanceData);
+        setUpdateStatus("Attendance updated successfully!");
+      } else {
+        setUpdateStatus("No changes to update.");
+      }
     } catch (error) {
       console.error(error);
-      setUpdateStatus("Failed to update.");
+      setUpdateStatus("Failed to update attendance.");
+    } finally {
       setIsUpdating(false);
     }
   };
@@ -160,12 +182,10 @@ const StudentAttendancePage = () => {
             );
           })}
 
-          {/* Update button */}
           <button className="update-button" onClick={handleUpdate} disabled={isUpdating}>
             {isUpdating ? "Updating..." : "Update Attendance"}
           </button>
 
-          {/* Status message */}
           {updateStatus && <p className="update-status">{updateStatus}</p>}
         </>
       )}
