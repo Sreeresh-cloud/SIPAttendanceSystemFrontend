@@ -103,7 +103,7 @@ body, html {
 .filter-section {
   display: flex;
   align-items: center;
-  transform: translateX(0); /* Reset transform for mobile view */
+  transform: translateX(1175px); /* Reset transform for mobile view */
   opacity: 0; /* Initial state */
   animation: fadeInOpacity 1.2s ease-in-out forwards; /* Only fade-in effect */
   margin-bottom: 20px; /* Add margin for better spacing */
@@ -129,6 +129,32 @@ body, html {
   background-color: #fff;
 }
 
+.download-section {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center vertically */
+  justify-content: flex-end; /* Aligns items to the right */
+}
+
+.download-section button {
+  background-color: #007bff; /* Primary blue color */
+  color: white; /* White text color */
+  border: none; /* Removes default border */
+  border-radius: 5px; /* Rounds the corners */
+  padding: 10px 15px; /* Adds padding for size */
+  font-size: 16px; /* Increases font size */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effects */
+}
+
+.download-section button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.download-section button:active {
+  transform: translateY(1px); /* Slight downward effect when clicked */
+}
+
 /* Average Attendance Section */
 .average-attendance {
   background-color: #f8f9fa;
@@ -138,7 +164,7 @@ body, html {
   text-align: center;
   max-width: 400px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transform: translateX(0); /* Reset transform for mobile view */
+  transform: translateX(530px); /* Reset transform for mobile view */
   opacity: 0; /* Initial state */
   animation: fadeInOpacity 1.4s ease-in-out forwards; /* Fade-in effect with delay */
 }
